@@ -2,6 +2,7 @@ package chess;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -118,14 +119,7 @@ public class ChessMatch {
 		if (promoted == null) {
 			throw new IllegalStateException("There is no piece to be promoted");
 		}
-		Set<String> possiblePromotions = new HashSet<String>() {
-			{
-				add("B");
-				add("N");
-				add("R");
-				add("Q");
-			}
-		};
+		Set<String> possiblePromotions = new HashSet<String>(Arrays.asList("B","N","R","Q"));
 		if (!possiblePromotions.contains(type)) {
 			throw new InvalidParameterException("Invalid type for promotion");
 		}
@@ -133,7 +127,7 @@ public class ChessMatch {
 		Position position = promoted.getChessPosition().toPosition();
 		Piece p = board.removePiece(position);
 		piecesOnTheBoard.remove(p);
-		ChessPiece newPiece = newPiece(type,promoted.getColor());
+		ChessPiece newPiece = newPiece(type, promoted.getColor());
 		board.placePiece(newPiece, position);
 		piecesOnTheBoard.add(newPiece);
 		return newPiece;
@@ -333,7 +327,7 @@ public class ChessMatch {
 		initialColorSetup(Color.WHITE, 1, 2);
 		initialColorSetup(Color.BLACK, 8, 7);
 	}
-	
+
 	private void initialColorSetup(Color color, int backline, int frontline) {
 		placeNewPiece('a', backline, new Rook(board, color));
 		placeNewPiece('b', backline, new Knight(board, color));
@@ -343,8 +337,8 @@ public class ChessMatch {
 		placeNewPiece('f', backline, new Bishop(board, color));
 		placeNewPiece('g', backline, new Knight(board, color));
 		placeNewPiece('h', backline, new Rook(board, color));
-		for(char c='a';c<='h';c++) {
-			placeNewPiece(c, frontline, new Pawn(board, color, this));			
+		for (char c = 'a'; c <= 'h'; c++) {
+			placeNewPiece(c, frontline, new Pawn(board, color, this));
 		}
 	}
 
