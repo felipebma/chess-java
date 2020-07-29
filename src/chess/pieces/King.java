@@ -60,7 +60,8 @@ public class King extends ChessPiece {
 		for (Position move : movingPositions) {
 			int distanceFromOponentKing = Math.max(Math.abs(oponentKingPosition.getRow() - move.getRow()),
 					Math.abs(oponentKingPosition.getColumn() - move.getColumn()));
-			if(distanceFromOponentKing < 2) return false;
+			if (distanceFromOponentKing < 2)
+				return false;
 		}
 		return true;
 	}
