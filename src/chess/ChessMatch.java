@@ -1,6 +1,5 @@
 package chess;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -121,7 +120,7 @@ public class ChessMatch {
 		}
 		Set<String> possiblePromotions = new HashSet<String>(Arrays.asList("B","N","R","Q"));
 		if (!possiblePromotions.contains(type)) {
-			throw new InvalidParameterException("Invalid type for promotion");
+			return promoted;
 		}
 
 		Position position = promoted.getChessPosition().toPosition();

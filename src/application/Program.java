@@ -1,9 +1,12 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import chess.ChessException;
 import chess.ChessMatch;
@@ -40,8 +43,13 @@ public class Program {
 				}
 				
 				if(chessMatch.getPromoted()!=null) {
-					System.out.println("Enter piece for promotion (B/N/R/Q)");
-					String type = in.next();
+					System.out.print("Enter piece for promotion (B/N/R/Q): ");
+					String type = in.next().toUpperCase();
+					Set<String> possiblePromotions = new HashSet<String>(Arrays.asList("B","N","R","Q"));
+					while (!possiblePromotions.contains(type)) {
+						System.out.print("Invalid value! Enter piece for promotion (B/N/R/Q): ");
+						type = in.next().toUpperCase();
+					}
 					chessMatch.replacePromotedPiece(type);
 				}
 			} catch (ChessException e) {
